@@ -1,0 +1,65 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: kubecost
+    url: https://kubecost.github.io/cost-analyzer/
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
+
+releases:
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus-community/kube-prometheus-stack
+    version: "57.0.2"
+    values:
+      - values/prometheus-values.yaml
+
+  - name: grafana
+    namespace: monitoring
+    chart: grafana/grafana
+    version: "7.3.6"
+    values:
+      - values/grafana-values.yaml
+
+  - name: ingress-nginx
+    namespace: ingress
+    chart: ingress-nginx/ingress-nginx
+    version: "4.8.3"
+    values:
+      - values/ingress-nginx-values.yaml
+
+  - name: rabbitmq
+    namespace: messaging
+    chart: bitnami/rabbitmq
+    version: "12.0.1"
+    values:
+      - values/rabbitmq-values.yaml
+
+  - name: kubecost
+    namespace: monitoring
+    chart: kubecost/cost-analyzer
+    version: "1.104.1"
+    values:
+      - values/kubecost-values.yaml
+
+  - name: argocd
+    namespace: argocd
+    chart: argo/argo-cd
+    version: "5.52.1"
+    values:
+      - values/argocd-values.yaml
+
+  - name: keycloak
+    namespace: keycloak
+    chart: bitnami/keycloak
+    version: "24.4.9"
+    values:
+      - values/keycloak-values.yaml

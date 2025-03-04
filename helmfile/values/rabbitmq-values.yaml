@@ -1,0 +1,19 @@
+auth:
+  username: "admin"
+  password: "admin123"
+  erlangCookie: "supersecretcookie"
+
+persistence:
+  enabled: true
+  size: 10Gi
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: rabbitmq.local
+  path: /
+  annotations:
+    kubernetes.io/ingress.class: "nginx"

@@ -1,0 +1,40 @@
+persistence:
+  enabled: true
+  size: 5Gi
+
+adminPassword: "admin123"
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  hosts:
+    - grafana.local
+  paths:
+    - "/"
+
+grafana.ini:
+  server:
+    root_url: "http://localhost:3000/"
+  auth:
+    disable_login_form: false
+  auth.generic_oauth:
+    verbose_logging: true
+    enabled: true
+    name: Keycloak
+    allow_sign_up: true
+    client_id: grafana
+    client_secret: w1e3yJTXpY1B68uAR0zx60Xm0WDUglnV
+    scopes: openid email profile
+    # auth_url must be accessible from the user's browser
+    auth_url: http://localhost:30080/realms/grafana/protocol/openid-connect/auth
+    # token_url and api_url are server-to-server communications
+    token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/token
+    api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
+    role_attribute_path: "contains(realm_access.roles[*], 'admin') && 'Admin' || 'Viewer'"      
+    login_attribute_path: preferred_username
+    name_attribute_path: name
+    email_attribute_path: email

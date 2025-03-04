@@ -1,0 +1,28 @@
+global:
+  postgresql:
+    auth:
+      password: "admin123"
+
+auth:
+  adminUser: "admin"
+  adminPassword: "admin123"
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  rules:
+    - host: keycloak.local
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  number: 80
