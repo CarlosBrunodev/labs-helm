@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: default  # Altere conforme necessário
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "250m"   # 250 milicores = 0.25 vCPU
+            memory: "256Mi" # 256 Megabytes de RAM
+          limits:
+            cpu: "500m"   # 500 milicores = 0.5 vCPU
+            memory: "512Mi" # 512 Megabytes de RAM

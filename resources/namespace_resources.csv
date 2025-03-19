@@ -1,0 +1,11 @@
+Namespace,Request CPU (m),Request Memory (Mi),Limit CPU (m),Limit Memory (Mi)
+argocd,0,0,0,0
+default,0,0,0,0
+ingress,0,0,0,0
+keycloak,600,640,900,960
+kube-node-lease,0,0,0,0
+kube-public,0,0,0,0
+kube-system,1150,390,300,490
+local-path-storage,0,0,0,0
+messaging,0,0,0,0
+monitoring,400,300,400,100

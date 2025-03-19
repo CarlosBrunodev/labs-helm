@@ -1,0 +1,27 @@
+quotas:
+  - name: quota-small
+    namespace: dev
+    requests:
+      cpu: "2"
+      memory: "4Gi"
+    limits:
+      cpu: "4"
+      memory: "8Gi"
+
+  - name: quota-medium
+    namespace: staging
+    requests:
+      cpu: "4"
+      memory: "8Gi"
+    limits:
+      cpu: "6"
+      memory: "12Gi"
+
+  - name: quota-large
+    namespace: production
+    requests:
+      cpu: "8"
+      memory: "16Gi"
+    limits:
+      cpu: "12"
+      memory: "24Gi"

@@ -1,0 +1,14 @@
+{% for quota in quotas %}
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: {{ quota.name }}
+  namespace: {{ quota.namespace }}
+spec:
+  hard:
+    requests.cpu: "{{ quota.requests.cpu }}"
+    requests.memory: "{{ quota.requests.memory }}"
+    limits.cpu: "{{ quota.limits.cpu }}"
+    limits.memory: "{{ quota.limits.memory }}"
+{% endfor %}

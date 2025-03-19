@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: GenerateAndApplyResourceQuota
+    displayName: 'Generate and Apply ResourceQuota'
+    jobs:
+      - job: GenerateAndApply
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+              addToPath: true
+
+          - script: |
+              python -m venv venv
+              source venv/bin/activate
+              pip install -r requirements.txt
+              python generate_quota.py --config ci/config.yaml --template ci/resource_quota_template.yaml
+            displayName: 'Install dependencies and generate ResourceQuota YAML'
+
+          - task: Kubernetes@1
+            displayName: 'Apply ResourceQuota to Kubernetes'
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: '$(KUBERNETES_SERVICE_CONNECTION)'
+              command: 'apply'
+              arguments: '-f resource_quota.yaml'

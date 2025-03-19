@@ -1,0 +1,7 @@
+Namespace,Deployment,Request CPU (m),Request Memory (Mi),Limit CPU (m),Limit Memory (Mi)
+default,nginx-deployment,250,256,500,512
+kube-system,coredns,100,70,0,170
+local-path-storage,local-path-provisioner,0,0,0,0
+monitoring,prometheus-grafana,0,0,0,0
+monitoring,prometheus-kube-prometheus-operator,0,0,0,0
+monitoring,prometheus-kube-state-metrics,0,0,0,0

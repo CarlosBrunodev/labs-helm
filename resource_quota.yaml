@@ -1,0 +1,39 @@
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-small
+  namespace: dev
+spec:
+  hard:
+    requests.cpu: "2"
+    requests.memory: "4Gi"
+    limits.cpu: "4"
+    limits.memory: "8Gi"
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-medium
+  namespace: staging
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: "8Gi"
+    limits.cpu: "6"
+    limits.memory: "12Gi"
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-large
+  namespace: production
+spec:
+  hard:
+    requests.cpu: "8"
+    requests.memory: "16Gi"
+    limits.cpu: "12"
+    limits.memory: "24Gi"
